@@ -1,0 +1,14 @@
+[
+  {
+    item: 'Blue Potion',
+    description: 'Heals 50hp',
+  },
+  {
+    item: 'Flute',
+    description: 'Makes pokemon go to sleep',
+  },
+  {
+    item: 'Snowglobe',
+    'description': 'Looks cool',
+  }
+]

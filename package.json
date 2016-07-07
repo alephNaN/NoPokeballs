@@ -1,0 +1,25 @@
+{
+  "name": "nopokeballs2",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "deploy": "gcloud app deploy --project nopokeballs",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.14.0",
+    "express3-handlebars": "^0.5.2",
+    "grunt": "^1.0.1",
+    "grunt-compile-handlebars": "^2.0.2",
+    "handlebars": "^4.0.5",
+    "morgan": "^1.6.1",
+    "serve-favicon": "^2.3.0",
+    "body-parser": "^1.14.2",
+    "cookie-parser": "^1.4.1",
+    "debug": "^2.2.0"
+  }
+}
