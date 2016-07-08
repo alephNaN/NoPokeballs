@@ -120,8 +120,36 @@ function read (id, cb) {
   });
 }
 
+// Creates a new book or updates an existing book with new data. The provided
+// data is automatically translated into Datastore format. The book will be
+// queued for background processing.
+function update (id, data, cb) {
+  var key;
+  if (id) {
+    key = ds.key([kind, parseInt(id, 10)]);
+  } else {
+    key = ds.key(kind);
+  }
+
+  var entity = {
+    key: key,
+    data: toDatastore(data, ['description'])
+  };
+
+  ds.save(
+    entity,
+    function (err) {
+      data.id = entity.key.id;
+      cb(err, err ? null : data);
+    }
+  );
+}
+
 // [START exports]
 module.exports = {
+  create: function (data, cb) {
+    update(null, data, cb);
+  },
   read: read,
   list: list
 };

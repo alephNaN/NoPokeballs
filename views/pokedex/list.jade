@@ -6,9 +6,12 @@ block content
     each pokemon in pokemons
       .media
         a(href="/pokedex/#{pokemon.number}")
-            tr
-              td= pokemon.name
-              td= pokemon.number
+          .media-left
+            img(src=pokemon.imageUrl || "http://placekitten.com/g/128/192")
+          .media-body
+            h4= pokemon.name
+            p= pokemon.number
+
 
   if !pokemons.length
     p No Pokemon Found

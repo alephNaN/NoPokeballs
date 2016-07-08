@@ -16,6 +16,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var config = require('../config');
+var images = require('../lib/images');
 
 function getModel () {
   return require('../models/datastore');
@@ -49,6 +50,49 @@ router.get('/', function list (req, res, next) {
     });
   });
 });
+
+
+/**
+ * GET /books/add
+ *
+ * Display a form for creating a book.
+ */
+router.get('/add', function addForm (req, res) {
+  res.render('pokedex/form.jade', {
+    pokemon: {},
+    action: 'Add'
+  });
+});
+
+
+/**
+ * POST /books/add
+ *
+ * Create a book.
+ */
+// [START add]
+router.post('/add',
+  images.multer.single('image'),
+  images.sendUploadToGCS,
+  function insert (req, res, next) {
+    var data = req.body;
+
+    // Was an image uploaded? If so, we'll use its public URL
+    // in cloud storage.
+    if (req.file && req.file.cloudStoragePublicUrl) {
+      data.imageUrl = req.file.cloudStoragePublicUrl;
+    }
+
+    // Save the data to the database.
+    getModel().create(data, function (err, savedData) {
+      if (err) {
+        return next(err);
+      }
+      res.redirect(req.baseUrl + '/' + savedData.id);
+    });
+  }
+);
+
 
 /**
  * GET /books/:id
