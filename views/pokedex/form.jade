@@ -1,8 +1,10 @@
 extends ../base.jade
 
+block h2
+  h2 Add Pokemon
+  
 // [START form]
 block content
-  h3 #{action} pokemon
   form(method="POST", enctype="multipart/form-data")
     .form-group
       label(for="name") Name
