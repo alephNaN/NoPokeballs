@@ -1,0 +1,20 @@
+extends ../base.jade
+
+block content
+  h3 Books
+
+    each pokemon in pokemons
+      .media
+        a(href="/pokedex/#{pokemon.number}")
+            tr
+              td= pokemon.name
+              td= pokemon.number
+
+  if !pokemons.length
+    p No Pokemon Found
+
+  if nextPageToken
+    nav
+      ul.pager
+        li
+          a(href="?pageToken=#{encodeURIComponent(nextPageToken)}") More
