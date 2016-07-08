@@ -1,70 +1,21 @@
+
 doctype html
 html(lang="en")
-  head
-    title Bookshelf - Node.js on Google Cloud Platform
-    meta(charset='utf-8')
-    meta(name="viewport", content="width=device-width, initial-scale=1")
-    meta(http-equiv="X-UA-Compatible", content="IE=edge")
-    meta(name="description", content="")
-    meta(name="author", content="")
-    
-    // Bootstrap Core CSS
-    link(rel="stylesheet", href="/vendor/bootstrap/css/bootstrap.min.css")
-    // Theme CSS
-    link(rel="stylesheet", href="/css/freelancer.css")
-    // Custom Fonts
-    link(href='/vendor/font-awesome/css/font-awesome.min.css', rel='stylesheet', type='text/css')
-    link(href='//fonts.googleapis.com/css?family=Montserrat:400,700', rel='stylesheet', type='text/css')
-    link(href='//fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic', rel='stylesheet', type='text/css')
-    
+
+include ./includes/head.jade
+
 body#page-top.index
-    // Navigation
-    nav#mainNav.navbar.navbar-default.navbar-fixed-top.navbar-custom
-      .container
-        // Brand and toggle get grouped for better mobile display
-        .navbar-header.page-scroll
-          button.navbar-toggle(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
-            span.sr-only Toggle navigation
-            |  Menu 
-            i.fa.fa-bars
-          a.navbar-brand(href='#page-top') NoPokeballs!
-        // Collect the nav links, forms, and other content for toggling
-        #bs-example-navbar-collapse-1.collapse.navbar-collapse
-          ul.nav.navbar-nav.navbar-right
-            li.hidden
-              a(href='#page-top')
-            li.page-scroll
-              a(href='/pokedex') Pokedex
-            li.page-scroll
-              a(href='/contribute') Contribute
-            li.page-scroll
-              a(href='#contact') Contact
-        // /.navbar-collapse
-      // /.container-fluid
-    // Header
-    header
-      .container
-        .row
-          .col-lg-12
-            .intro-text
-    // Portfolio Grid Section
-    section#portfolio
-      .container
-        
-        .row
-          .col-lg-12.text-center
-            h2 Articles
-            hr.star-primary
-        .row
-          block content
+    
+    include ./includes/navigation.jade
+    
+    include ./includes/header.jade
+            
+            
+    include ./includes/section.jade
           
-    // Footer
-    footer.text-center
-      .footer-below
-        .container
-          .row
-            .col-lg-12
-              | Copyright © NoPokeballs 2016
+    include ./includes/footer.jade
+              
+              
     // Scroll to Top Button (Only visible on small and extra-small screen sizes)
     .scroll-top.page-scroll.hidden-sm.hidden-xs.hidden-lg.hidden-md
       a.btn.btn-primary(href='#page-top')
