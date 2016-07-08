@@ -24,6 +24,8 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.set('trust proxy', true);
 
+app.use(express.static('public'));
+
 app.use('/pokedex', require('./routes/pokedex.js'));
 app.use('/index', require('./routes/index.js'));
 
