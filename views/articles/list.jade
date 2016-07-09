@@ -1,0 +1,20 @@
+extends ../base.jade
+
+block h2
+  h2 Articles
+  
+block content
+  each article in articles
+    a(href="/articles/#{article.id}")
+      span Article: #{article.title}
+    br
+
+
+  if !articles.length
+    p No Articles Found
+
+  if nextPageToken
+    nav
+      ul.pager
+        li
+          a(href="?pageToken=#{encodeURIComponent(nextPageToken)}") More
