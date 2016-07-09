@@ -1,5 +1,6 @@
 if profile
   span Logged in as: #{profile.displayName} &nbsp;
+  br
   a(href=logout) (logout)
  
   ul
@@ -7,5 +8,8 @@ if profile
       a(href = '/addpokemon') Add Pokemon to Pokedex
     li Add Item to Itemlist
     li Add Edit / Delete Pokemon
+    
+    
 else
-  a(href=login) Login
+  a(href=login)
+    button(type="button").btn.btn-default Login With Google+
