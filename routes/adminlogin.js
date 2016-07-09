@@ -25,7 +25,6 @@ var router = express.Router();
 // information and expose login/logout URLs to templates.
 router.use(oauth2.template);
 
-
 // Set Content-Type for all responses for these routes
 router.use(function (req, res, next) {
   res.set('Content-Type', 'text/html');
@@ -37,12 +36,12 @@ router.use(function (req, res, next) {
  *
  * Display a page of books (up to ten at a time).
  */
-router.get('/', function list (req, res, next) {
+router.get('/', function(req, res, next) {
     res.render('adminlogin/adminlogin.jade', {});
 });
 
 /**
- * Errors on "/books/*" routes.
+ * Errors
  */
 router.use(function handleRpcError (err, req, res, next) {
   // Format error and forward to generic error handler for logging and
