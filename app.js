@@ -59,6 +59,7 @@ app.use(express.static(path.join(__dirname, 'static')));
 app.use('/pokedex', require('./routes/pokedex.js'));
 app.use('/index', require('./routes/index.js'));
 app.use('/adminlogin', require('./routes/adminlogin.js'));
+app.use('/addpokemon', require('./routes/addpokemon.js'));
 
 // Redirect root to /home
 app.get('/', function (req, res) {

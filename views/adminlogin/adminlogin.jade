@@ -1,5 +1,11 @@
 if profile
- span #{profile.displayName} &nbsp;
- a(href=logout) (logout)
+  span Logged in as: #{profile.displayName} &nbsp;
+  a(href=logout) (logout)
+ 
+  ul
+    li 
+      a(href = '/addpokemon') Add Pokemon to Pokedex
+    li Add Item to Itemlist
+    li Add Edit / Delete Pokemon
 else
- a(href=login) Login
+  a(href=login) Login

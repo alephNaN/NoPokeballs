@@ -16,8 +16,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var config = require('../config');
-var images = require('../lib/images');
-var oauth2 = require('../lib/oauth2');
 
 function getModel () {
   return require('../models/datastore');
@@ -51,78 +49,6 @@ router.get('/', function list (req, res, next) {
     });
   });
 });
-
-
-/**
- * GET /books/add
- *
- * Display a form for creating a book.
- */
-router.get('/add', function addForm (req, res) {
-  res.render('pokedex/form.jade', {
-    pokemon: {},
-    action: 'Add'
-  });
-});
-
-
-/**
- * POST /books/add
- *
- * Create a book.
- */
-// [START add]
-router.post('/add',
-  images.multer.single('image'),
-  images.sendUploadToGCS,
-  function insert (req, res, next) {
-    var data = req.body;
-
-    // Not logged in
-    if (!req.user) {
-          res.redirect("facebook.com")
-    }
-
-    data.createdBy = req.user.displayName;
-    data.createdById = req.user.id;
-
-    // Was an image uploaded? If so, we'll use its public URL
-    // in cloud storage.
-    if (req.file && req.file.cloudStoragePublicUrl) {
-      data.imageUrl = req.file.cloudStoragePublicUrl;
-    }
-
-    // Save the data to the database.
-    getModel().create(data, function (err, savedData) {
-      if (err) {
-        return next(err);
-      }
-      res.redirect(req.baseUrl + '/' + savedData.id);
-    });
-
-  }
-);
-
-// Use the oauth2.required middleware to ensure that only logged-in users
-// can access this handler.
-router.get('/mine', oauth2.required, function list (req, res, next) {
-  getModel().listBy(
-    req.user.id,
-    10,
-    req.query.pageToken,
-    function (err, entities, cursor, apiResponse) {
-      if (err) {
-        return next(err);
-      }
-      res.render('pokedex/list.jade', {
-        pokemon: entities,
-        nextPageToken: cursor
-      });
-    }
-  );
-});
-
-
 
 
 /**
