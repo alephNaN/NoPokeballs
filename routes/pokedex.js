@@ -17,12 +17,17 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var config = require('../config');
 var images = require('../lib/images');
+var oauth2 = require('../lib/oauth2');
 
 function getModel () {
   return require('../models/datastore');
 }
 
 var router = express.Router();
+
+// Use the oauth middleware to automatically get the user's profile
+// information and expose login/logout URLs to templates.
+router.use(oauth2.template);
 
 // Automatically parse request body as form data
 router.use(bodyParser.urlencoded({ extended: false }));
@@ -77,6 +82,14 @@ router.post('/add',
   function insert (req, res, next) {
     var data = req.body;
 
+    // Not logged in
+    if (!req.user) {
+          res.redirect("facebook.com")
+    }
+
+    data.createdBy = req.user.displayName;
+    data.createdById = req.user.id;
+
     // Was an image uploaded? If so, we'll use its public URL
     // in cloud storage.
     if (req.file && req.file.cloudStoragePublicUrl) {
@@ -90,8 +103,30 @@ router.post('/add',
       }
       res.redirect(req.baseUrl + '/' + savedData.id);
     });
+
   }
 );
+
+// Use the oauth2.required middleware to ensure that only logged-in users
+// can access this handler.
+router.get('/mine', oauth2.required, function list (req, res, next) {
+  getModel().listBy(
+    req.user.id,
+    10,
+    req.query.pageToken,
+    function (err, entities, cursor, apiResponse) {
+      if (err) {
+        return next(err);
+      }
+      res.render('pokedex/list.jade', {
+        pokemon: entities,
+        nextPageToken: cursor
+      });
+    }
+  );
+});
+
+
 
 
 /**
