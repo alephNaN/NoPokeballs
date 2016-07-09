@@ -25,10 +25,6 @@ function getModel () {
 
 var router = express.Router();
 
-// Use the oauth middleware to automatically get the user's profile
-// information and expose login/logout URLs to templates.
-router.use(oauth2.template);
-
 // Automatically parse request body as form data
 router.use(bodyParser.urlencoded({ extended: false }));
 
