@@ -12,6 +12,11 @@ function getModel () {
   return require('../models/datastore');
 }
 
+router.use(function (req, res, next) {
+  res.set('Content-Type', 'text/html');
+  next();
+});
+
 // Automatically parse request body as form data
 router.use(bodyParser.urlencoded({ extended: false }));
 
