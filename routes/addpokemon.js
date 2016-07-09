@@ -58,8 +58,9 @@ router.post('/',
     getModel().create(data, function (err, savedData) {
       if (err) {
         return next(err);
+      } else {
+        res.redirect(req.baseUrl);
       }
-      res.redirect(req.baseUrl + '/' + savedData.id);
     });
 
   }
