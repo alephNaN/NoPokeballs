@@ -14,15 +14,17 @@ p.small {
   font-size: 16px;
 }
 a {
-  color: white;
+  color: blue;
   outline: none;
 }
 a:hover,
 a:focus,
 a:active,
 a.active {
-  color: white;
+  font-decoration: underline
+  /*color: ;
   background-color: black;
+  */
 }
 h1,
 h2,
