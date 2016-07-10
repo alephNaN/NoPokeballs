@@ -28,7 +28,7 @@ var kind = 'Pokemon';
 //     property: value
 //   }
 function fromDatastore (obj) {
-  obj.data.id = obj.key.id;
+  obj.data.id = obj.key.name;
   return obj.data;
 }
 
@@ -92,6 +92,21 @@ function list (limit, token, cb) {
 }
 // [END list]
 
+// List of pokemon numbers that exist in DB
+function getListOfPokemonNumbers(cb) {
+  var q = ds.createQuery([kind]);
+
+  ds.runQuery(q, function (err, entities, nextQuery) {
+    if (err) {
+      return cb(err);
+    }
+    
+    var numbers = entities.map(entity => fromDatastore(entity).number);
+    cb(null, numbers);
+  });
+}
+
+
 function read (id, cb) {
   var key = ds.key([kind, id]);
   ds.get(key, function (err, entity) {
@@ -144,6 +159,7 @@ module.exports = {
     update(null, data, cb);
   },
   read: read,
-  list: list
+  list: list,
+  getListOfPokemonNumbers: getListOfPokemonNumbers
 };
 // [END exports]

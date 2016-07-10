@@ -48,6 +48,7 @@ app.use('/index', require('./routes/index.js'));
 app.use('/adminlogin', require('./routes/adminlogin.js'));
 app.use('/addpokemon', require('./routes/addpokemon.js'));
 app.use('/articles', require('./routes/articles.js'));
+app.use('/addchargemove', require('./routes/addchargemove.js'));
 
 // Redirect root to /home
 app.get('/', function (req, res) {

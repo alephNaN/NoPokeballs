@@ -1,0 +1,17 @@
+extends ../base.jade
+
+block h2
+  h2 profile.email
+
+// [START form]
+block content
+  form(method="POST", enctype="multipart/form-data")
+    .form-group
+      label(for="pokemons") Pokemon Number
+      select(name="pokemons", id="pokemons")
+         each number in pokemonNumbers    
+          option(value="#{number}")= number
+    
+    button.btn.btn-success(type="submit") Save
+    
+// [END form]
