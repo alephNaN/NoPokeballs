@@ -93,7 +93,7 @@ function list (limit, token, cb) {
 // [END list]
 
 function read (id, cb) {
-  var key = ds.key([kind, parseInt(id, 10)]);
+  var key = ds.key([kind, id]);
   ds.get(key, function (err, entity) {
     if (err) {
       return cb(err);

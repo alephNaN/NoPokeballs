@@ -57,13 +57,14 @@ router.get('/', function list (req, res, next) {
  *
  * Display a book.
  */
-router.get('/:pokedex', function get (req, res, next) {
-  getModel().read(req.params.pokedex, function (err, entity) {
+router.get('/:pokemon', function get (req, res, next) {
+  getModel().read(req.params.pokemon, function (err, entity) {
     if (err) {
       return next(err);
     }
+    
     res.render('pokedex/view.jade', {
-      pokedex: entity
+      pokemon: entity
     });
   });
 });

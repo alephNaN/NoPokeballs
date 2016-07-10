@@ -1,9 +1,14 @@
 extends ../base.jade
 
-block content
-  h3 Pokemon
-    small
+block h2
+  h2 Pokedex: #{pokemon.name}
 
-  .media
-    .media-body
-      h4= pokemon.name
+block content
+  table
+    each val, prop in pokemon
+      tr
+        td= prop
+        td= val
+        
+  p #{pokemon.description}
+
