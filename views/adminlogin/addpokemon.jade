@@ -11,13 +11,25 @@ block content
       input.form-control(type="text", name="name", id="name", value=pokemon.name)
     .form-group
       label(for="number") Number
-      input.form-control(type="number", name="number", id="number", value=pokemon.number)
+      input.form-control(type="text", name="number", id="number", value=pokemon.number)
     .form-group
       label(for="description") Description
       input.form-control(type="text", name="description", id="description", value=pokemon.description)
     .form-group
-      label(for="type") Type
-      input.form-control(type="text", name="type", id="type", value=pokemon.type)
+      label(for="types") Comma Seperated list of type. for example: "flying, dragon"
+      input.form-control(type="text", name="types", id="types", value=pokemon.types)
+    .form-group
+      label(for="weight") Weight. If (9.64kg, enter as 9.64)
+      input.form-control(type="text", name="weight", id="weight", value=pokemon.weight)
+    .form-group
+      label(for="height") Type. If (.62m, enter as ".62", if 1.00m, enter as "1.00")
+      input.form-control(type="text", name="height", id="height", value=pokemon.height)
+    .form-group
+      label(for="cost_powerup") Cost to powerup. Enter as "200 stardust, 1 caterpie candy", for example. 
+      input.form-control(type="text", name="cost_powerup", id="cost_powerup", value=pokemon.cost_powerup)    
+    .form-group
+      label(for="cost_evolve") Cost to evolve. Enter as "50 caterpie candy", for example. 
+      input.form-control(type="text", name="cost_evolve", id="cost_evolve", value=pokemon.cost_evolve)  
     .form-group
       label(for="image") Image
       input.form-control(type="file", name="image", id="image")
