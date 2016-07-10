@@ -4,7 +4,7 @@ var express = require('express');
 var config = require('../config');
 
 function getModel () {
-  return require('../models/datastore');
+  return require('../models/pokemon');
 }
 
 var router = express.Router();

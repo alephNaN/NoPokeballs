@@ -9,7 +9,7 @@ var oauth2 = require('../lib/oauth2');
 var router = express.Router();
 
 function getModel () {
-  return require('../models/datastore');
+  return require('../models/pokemon');
 }
 
 router.use(function (req, res, next) {
