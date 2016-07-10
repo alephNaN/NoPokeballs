@@ -56,9 +56,6 @@ function fromDatastore (obj) {
 //     }
 //   ]
 function toDatastore (obj, nonIndexed) {
-  
-  console.log("Before1:" + JSON.stringify(obj));
-  console.log("Before2:" + JSON.stringify(nonIndexed));
   nonIndexed = nonIndexed || [];
   var results = [];
   Object.keys(obj).forEach(function (k) {
@@ -71,9 +68,7 @@ function toDatastore (obj, nonIndexed) {
       excludeFromIndexes: nonIndexed.indexOf(k) !== -1
     });
   });
-  
-  
-  console.log("Before2:" + JSON.stringify(results));
+
   return results;
 }
 
