@@ -143,28 +143,12 @@ function update (id, data, cb) {
   );
 }
 
-function listBy (userId, limit, token, cb) {
-  var q = ds.createQuery([kind])
-    .filter('createdById =', userId)
-    .limit(limit)
-    .start(token);
-
-  ds.runQuery(q, function (err, entities, nextQuery) {
-    if (err) {
-      return cb(err);
-    }
-    var hasMore = entities.length === limit ? nextQuery.startVal : false;
-    cb(null, entities.map(fromDatastore), hasMore);
-  });
-}
-
 // [START exports]
 module.exports = {
   create: function (data, cb) {
     update(null, data, cb);
   },
   read: read,
-  list: list,
-  listBy: listBy
+  list: list
 };
 // [END exports]
