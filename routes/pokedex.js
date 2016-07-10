@@ -39,15 +39,10 @@ router.get('/', function list (req, res, next) {
       return next(err);
     }
     
-    
-    console.log("Before:" + JSON.stringify(entities));
-    
     // Convert list of types into array
     entities.forEach( pokemon => 
       pokemon.types = pokemon.types.split(",")
     );
-    
-    console.log("After:" + JSON.stringify(entities));
     
     res.render('pokedex/list.jade', {
       pokemons: getRows(entities),
