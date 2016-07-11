@@ -5,13 +5,25 @@ block h2
 
 // [START form]
 block content
-  form(method="POST", enctype="multipart/form-data")
+  form(method="POST")
     .form-group
       label(for="pokemons") Pokemon Number
-      select(name="pokemons", id="pokemons")
+      select(name="pokemon", id="pokemons")
          each number in pokemonNumbers    
           option(value="#{number}")= number
-    
+    .form-group
+      label(for="name") Name of chargemove
+      input.form-control(type="text", name="name", id="name", value=chargemove.name)
+    .form-group
+      label(for="damage") How much damage
+      input.form-control(type="damage", name="damage", id="damage", value=chargemove.damage)
+    .form-group
+      label(for="type") water, etc.
+      input.form-control(type="text", name="type", id="type", value=chargemove.type)
+    .form-group
+      label(for="cost") How many stars the move costs
+      input.form-control(type="text", name="cost", id="cost", value=chargemove.cost)
+      
     button.btn.btn-success(type="submit") Save
     
 // [END form]

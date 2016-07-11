@@ -8,8 +8,12 @@ var oauth2 = require('../lib/oauth2');
 
 var router = express.Router();
 
-function getModel () {
+function getModelPokemon () {
   return require('../models/pokemon');
+}
+
+function getModelChargeMove() {
+  return require('../models/chargemove')
 }
 
 router.use(function (req, res, next) {
@@ -27,17 +31,39 @@ router.use(bodyParser.urlencoded({ extended: false }));
  */
 router.get('/', oauth2.required, function addForm (req, res) {
     
-  getModel().getListOfPokemonNumbers(function (err, pokemonNumbers, cursor) {
+  getModelPokemon().getListOfPokemonNumbers(function (err, pokemonNumbers, cursor) {
     if (err) {
       res.redirect('/');
     }
     
     res.render('adminlogin/addchargemove.jade', {
       pokemonNumbers: pokemonNumbers,
+      chargemove: {},
       action: 'Add'
     });
   });
 
 });
+
+
+/**
+ * POST /books/add
+ *
+ * Create a book.
+ */
+// [START add]
+router.post('/',
+  oauth2.required,
+  function insert (req, res, next) {
+    // Save the data to the database.
+    getModelChargeMove().create(req.body, function (err, savedData) {
+      if (err) {
+        return next(err);
+      } else {
+        res.redirect(req.baseUrl);
+      }
+    });
+  }
+);
 
 module.exports = router;
