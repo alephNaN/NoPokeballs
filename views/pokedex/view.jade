@@ -9,4 +9,11 @@ block content
       tr
         td= prop
         td= val
-
+        
+  each chargemove in chargemoves
+    h2 Chargemove:  #{chargemove.name}
+    table
+      each val, prop in chargemove
+        tr
+        td= prop
+        td= val

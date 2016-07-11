@@ -75,11 +75,12 @@ function toDatastore (obj, nonIndexed) {
 // [END list]
 
 
+
+
 // Creates a new book or updates an existing book with new data. The provided
 // data is automatically translated into Datastore format. The book will be
 // queued for background processing.
 function update (id, data, cb) {
-
   var key;
   if (id) {
     key = ds.key([kind, parseInt(id, 10)]);
@@ -107,10 +108,32 @@ function update (id, data, cb) {
   );
 }
 
+
+// Similar to ``list``, but only lists the books created by the specified
+// user.
+// [START listby]
+function listByPokemon (pokemonId, cb) {
+  
+  // Query for the list of attacks for this pokemon
+  var q = ds.createQuery([kind])
+    .filter('pokemon', pokemonId);
+  
+  ds.runQuery(q, function (err, entities) {
+    if (err) {
+      return cb(err, null);
+    }
+    
+    cb(false, entities.map(e => fromDatastore(e)));
+  });
+}
+
+
+
 // [START exports]
 module.exports = {
   create: function (data, cb) {
     update(null, data, cb);
-  }
+  },
+  listByPokemon: listByPokemon
 };
 // [END exports]

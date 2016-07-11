@@ -3,8 +3,12 @@
 var express = require('express');
 var config = require('../config');
 
-function getModel () {
+function getModelPokemon () {
   return require('../models/pokemon');
+}
+
+function getModelChargeMove() {
+  return require('../models/chargemove');  
 }
 
 var router = express.Router();
@@ -34,7 +38,7 @@ function getRows(items) {
  * Display a page of books (up to ten at a time).
  */
 router.get('/', function list (req, res, next) {
-  getModel().list(24, req.query.pageToken, function (err, entities, cursor) {
+  getModelPokemon().list(24, req.query.pageToken, function (err, entities, cursor) {
     if (err) {
       return next(err);
     }
@@ -58,14 +62,24 @@ router.get('/', function list (req, res, next) {
  * Display a book.
  */
 router.get('/:pokemon', function get (req, res, next) {
-  getModel().read(req.params.pokemon, function (err, entity) {
+  getModelPokemon().read(req.params.pokemon, function (err, entity) {
     if (err) {
       return next(err);
     }
     
-    res.render('pokedex/view.jade', {
-      pokemon: entity
-    });
+    // Lookup charge moves for this pokemon
+    var pokemonNumber = entity.number;
+    getModelChargeMove().listByPokemon(pokemonNumber, function(
+      err, chargemoves) {
+        if (err) {
+          
+        } else {
+          res.render('pokedex/view.jade', {
+            pokemon: entity,
+            chargemoves: chargemoves
+          });
+        }
+      });
   });
 });
 
